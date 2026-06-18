@@ -1,4 +1,4 @@
-
+Claude es IA y puede cometer errores. Por favor, verifica nuevamente las respuestas.
 import { useState, useEffect, useCallback, useRef } from "react";
 
 const CLIENT_ID = "b245a9fb94e749ea96eb95496667b263";
@@ -114,6 +114,20 @@ function SpotifyLink({ url, size=26 }) {
 
 function HScroll({ children }) {
   return <div style={{ display:"flex", gap:12, overflowX:"auto", padding:"0 20px 12px", scrollbarWidth:"none" }}>{children}</div>;
+}
+
+function SearchInput({ q, setQ, wide }) {
+  return (
+    <div style={{ padding:`12px ${wide?24:16}px 4px` }}>
+      <div style={{ display:"flex", alignItems:"center", gap:10, background:"#fff", borderRadius:50, padding:"10px 20px" }}>
+        <span style={{ color:"#666" }}>{IC.search}</span>
+        <input value={q} onChange={e=>setQ(e.target.value)} placeholder="Canciones, artistas, álbumes…"
+          autoFocus
+          style={{ flex:1, border:"none", outline:"none", fontSize:15, background:"transparent", color:"#111" }}/>
+        {q&&<button onClick={()=>setQ("")} style={{ border:"none", background:"none", cursor:"pointer", color:"#666", fontSize:18 }}>✕</button>}
+      </div>
+    </div>
+  );
 }
 
 function SecTitle({ children, sub }) {
@@ -784,14 +798,7 @@ export default function SoUNdiFay() {
   function SearchTab() {
     return(
       <>
-        <div style={{ padding:`12px ${wide?24:16}px 4px` }}>
-          <div style={{ display:"flex", alignItems:"center", gap:10, background:"#fff", borderRadius:50, padding:"10px 20px" }}>
-            <span style={{ color:"#666" }}>{IC.search}</span>
-            <input value={q} onChange={e=>setQ(e.target.value)} placeholder="Canciones, artistas, álbumes…"
-              style={{ flex:1, border:"none", outline:"none", fontSize:15, background:"transparent", color:"#111" }}/>
-            {q&&<button onClick={()=>setQ("")} style={{ border:"none", background:"none", cursor:"pointer", color:"#666", fontSize:18 }}>✕</button>}
-          </div>
-        </div>
+        <SearchInput q={q} setQ={setQ} wide={wide}/>
         {srArtists.length>0&&<>
           <SecTitle>Artistas</SecTitle>
           <HScroll>{srArtists.map(a=>(
