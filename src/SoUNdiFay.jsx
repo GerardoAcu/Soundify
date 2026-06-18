@@ -946,4 +946,5 @@ export default function SoUNdiFay() {
         onClose={()=>{ stopAudio(); setNowPlaying(null); setPlaying(false); }}
         hasNext={hasNext} onNext={playNext} wide={false}/>
     </div>
-  )
+  );
+}
